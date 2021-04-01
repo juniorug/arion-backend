@@ -1,0 +1,49 @@
+# Recursos
+
+## Actors
+
+post 	/actors   		creates a new actor 			CreateActor
+get 	/actors   		retrieves the actors' list		QueryAllActors
+put 	/actors   		updates an existing actor 		UpdateActor
+get 	/actors/{id}  	retrieves an existing actor 	QueryActor
+delete 	/actors/{id}  	removes an existing actor
+
+{ActorID, ActorType, ActorName, AditionalInfoMap}
+
+
+## Steps
+
+post 	/steps   		creates a new step 				CreateStep
+get 	/steps   		retrieves the steps' list 		QueryAllSteps
+put 	/steps   		updates an existing step 		UpdateStep
+get 	/steps/{id}  	retrieves an existing step 		QueryStep
+delete 	/steps/{id}  	removes an existing step
+
+{StepID, StepName, StepOrder, ActorType, AditionalInfoMap}
+
+
+## AssetItems
+
+post 	/asset-items   		creates a new asset-item 				CreateAssetItem
+get  	/asset-items   		retrieves the asset-items' list 		QueryAllAssetItems
+put  	/asset-items   		updates an existing asset-item 			UpdateAssetItem
+get  	/asset-items/{id}  	retrieves an existing asset-item 		QueryAssetItem
+delete 	/asset-items/{id}  	removes an existing asset-item
+put 	/asset-items/{id}  	uptades an existing asset-item-owner 	ChangeAssetItemOwner
+
+{AssetItemID, CurrentOwnerID, ProcessDate, DeliveryDate, OrderPrice, ShippingPrice, Status, AditionalInfoMap}
+
+
+## Assets
+
+post 	/assets   						creates a new asset 						CreateAsset
+get  	/assets   						retrieves the assets' list 					QueryAllAssets
+put  	/assets   						updates an existing asset 					UpdateAsset
+get  	/assets/{id}  					retrieves an existing asset 				QueryAsset
+delete 	/assets/{id}  					removes an existing asset
+
+put 	/assets/{id}/actors/{id}  		associates an asset with an actor 			AddActor
+put 	/assets/{id}/steps/{id}  		associates an asset with a steps 			AddStep
+put 	/assets/{id}/asset-items/{id}  	associates an asset with an asset-item 		AddAssetItem
+
+{AssetID, AssetName, AssetItems, Actors, Steps, AditionalInfoMap}

@@ -9,10 +9,11 @@ app.use(bodyParser.json());
 const { Gateway, Wallets } = require("fabric-network");
 const path = require("path");
 const fs = require("fs");
+
+//create empty global gateway object
+let gateway: Gateway;
 //create empty global contract object
 let contract: Contract;
-//create empty global contract object
-let gateway: Gateway;
 
 app.get("/api/queryallproperties", async function (req, res) {
   try {
