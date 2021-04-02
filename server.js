@@ -9,6 +9,7 @@ app.use(bodyParser.json());
 const { Gateway, Wallets } = require("fabric-network");
 const path = require("path");
 const fs = require("fs");
+const appUser = "appUser";
 
 //create empty global gateway object
 let gateway: Gateway;
@@ -81,6 +82,344 @@ app.put("/api/changepropertyownership/:id", async function (req, res) {
   }
 });
 
+/***** ACTORS ******/
+
+app.post("/api/actors/", async function (req, res) {
+  try {
+    prepareHyperledgerConnection();
+    await contract.submitTransaction(
+      "Add...",
+      req.body.id,
+      req.body.,
+      req.body.,
+      req.body.,
+      req.body.
+    );
+    console.log("Transaction has been submitted");
+    res.send("Transaction has been submitted");
+    await disconnectGateway();
+  } catch (error) {
+    console.error(`Failed to evaluate transaction: ${error}`);
+    process.exit(1);
+  }
+});
+
+app.get("/api/actors", async function (req, res) {
+  try {
+    prepareHyperledgerConnection();
+    const result = await contract.evaluateTransaction("QueryAll...");
+    console.log(`Transaction evaluated. result is: ${result.toString()}`);
+    res.status(200).json({ response: result.toString() });
+    await disconnectGateway();
+  } catch (error) {
+    console.error(`Failed to evaluate transaction: ${error}`);
+    process.exit(1);
+  }
+});
+
+app.put("/api/actors/:id", async function (req, res) {
+  try {
+    prepareHyperledgerConnection();
+    await contract.submitTransaction(
+      "Update...",
+      req.params.id,
+      req.body.newOwner
+    );
+    console.log("Transaction has been submitted");
+    res.send("Transaction has been submitted");
+    await disconnectGateway();
+  } catch (error) {
+    console.error(`Failed to evaluate transaction: ${error}`);
+    process.exit(1);
+  }
+});
+
+app.get("/api/actors/:id", async function (req, res) {
+  try {
+    prepareHyperledgerConnection();
+    const result = await contract.evaluateTransaction(
+      "Query...",
+      req.params.id
+    );
+    console.log(`Transaction. result is: ${result.toString()}`);
+    res.status(200).json({ response: result.toString() });
+    await disconnectGateway();
+  } catch (error) {
+    console.error(`Failed to evaluate transaction: ${error}`);
+    process.exit(1);
+  }
+});
+
+app.delete("/api/actors/:id", async function (req, res) {
+  try {
+    prepareHyperledgerConnection();
+    const result = await contract.evaluateTransaction(
+      "Query...",
+      req.params.id
+    );
+    console.log(`Transaction. result is: ${result.toString()}`);
+    res.status(200).json({ response: result.toString() });
+    await disconnectGateway();
+  } catch (error) {
+    console.error(`Failed to evaluate transaction: ${error}`);
+    process.exit(1);
+  }
+});
+
+/***** STEPS ******/
+
+app.post("/api/steps/", async function (req, res) {
+  try {
+    prepareHyperledgerConnection();
+    await contract.submitTransaction(
+      "Add...",
+      req.body.id,
+      req.body.,
+      req.body.,
+      req.body.,
+      req.body.
+    );
+    console.log("Transaction has been submitted");
+    res.send("Transaction has been submitted");
+    await disconnectGateway();
+  } catch (error) {
+    console.error(`Failed to evaluate transaction: ${error}`);
+    process.exit(1);
+  }
+});
+
+app.get("/api/steps", async function (req, res) {
+  try {
+    prepareHyperledgerConnection();
+    const result = await contract.evaluateTransaction("QueryAll...");
+    console.log(`Transaction evaluated. result is: ${result.toString()}`);
+    res.status(200).json({ response: result.toString() });
+    await disconnectGateway();
+  } catch (error) {
+    console.error(`Failed to evaluate transaction: ${error}`);
+    process.exit(1);
+  }
+});
+
+app.put("/api/steps/:id", async function (req, res) {
+  try {
+    prepareHyperledgerConnection();
+    await contract.submitTransaction(
+      "Update...",
+      req.params.id,
+      req.body.newOwner
+    );
+    console.log("Transaction has been submitted");
+    res.send("Transaction has been submitted");
+    await disconnectGateway();
+  } catch (error) {
+    console.error(`Failed to evaluate transaction: ${error}`);
+    process.exit(1);
+  }
+});
+
+app.get("/api/steps/:id", async function (req, res) {
+  try {
+    prepareHyperledgerConnection();
+    const result = await contract.evaluateTransaction(
+      "Query...",
+      req.params.id
+    );
+    console.log(`Transaction. result is: ${result.toString()}`);
+    res.status(200).json({ response: result.toString() });
+    await disconnectGateway();
+  } catch (error) {
+    console.error(`Failed to evaluate transaction: ${error}`);
+    process.exit(1);
+  }
+});
+
+app.delete("/api/steps/:id", async function (req, res) {
+  try {
+    prepareHyperledgerConnection();
+    const result = await contract.evaluateTransaction(
+      "Query...",
+      req.params.id
+    );
+    console.log(`Transaction. result is: ${result.toString()}`);
+    res.status(200).json({ response: result.toString() });
+    await disconnectGateway();
+  } catch (error) {
+    console.error(`Failed to evaluate transaction: ${error}`);
+    process.exit(1);
+  }
+});
+
+/***** ASSET_ITEMS ******/
+
+app.post("/api/asset-items/", async function (req, res) {
+  try {
+    prepareHyperledgerConnection();
+    await contract.submitTransaction(
+      "Add...",
+      req.body.id,
+      req.body.,
+      req.body.,
+      req.body.,
+      req.body.
+    );
+    console.log("Transaction has been submitted");
+    res.send("Transaction has been submitted");
+    await disconnectGateway();
+  } catch (error) {
+    console.error(`Failed to evaluate transaction: ${error}`);
+    process.exit(1);
+  }
+});
+
+app.get("/api/asset-items", async function (req, res) {
+  try {
+    prepareHyperledgerConnection();
+    const result = await contract.evaluateTransaction("QueryAll...");
+    console.log(`Transaction evaluated. result is: ${result.toString()}`);
+    res.status(200).json({ response: result.toString() });
+    await disconnectGateway();
+  } catch (error) {
+    console.error(`Failed to evaluate transaction: ${error}`);
+    process.exit(1);
+  }
+});
+
+app.put("/api/asset-items/:id", async function (req, res) {
+  try {
+    prepareHyperledgerConnection();
+    await contract.submitTransaction(
+      "Update...",
+      req.params.id,
+      req.body.newOwner
+    );
+    console.log("Transaction has been submitted");
+    res.send("Transaction has been submitted");
+    await disconnectGateway();
+  } catch (error) {
+    console.error(`Failed to evaluate transaction: ${error}`);
+    process.exit(1);
+  }
+});
+
+app.get("/api/asset-items/:id", async function (req, res) {
+  try {
+    prepareHyperledgerConnection();
+    const result = await contract.evaluateTransaction(
+      "Query...",
+      req.params.id
+    );
+    console.log(`Transaction. result is: ${result.toString()}`);
+    res.status(200).json({ response: result.toString() });
+    await disconnectGateway();
+  } catch (error) {
+    console.error(`Failed to evaluate transaction: ${error}`);
+    process.exit(1);
+  }
+});
+
+app.delete("/api/asset-items/:id", async function (req, res) {
+  try {
+    prepareHyperledgerConnection();
+    const result = await contract.evaluateTransaction(
+      "Query...",
+      req.params.id
+    );
+    console.log(`Transaction. result is: ${result.toString()}`);
+    res.status(200).json({ response: result.toString() });
+    await disconnectGateway();
+  } catch (error) {
+    console.error(`Failed to evaluate transaction: ${error}`);
+    process.exit(1);
+  }
+});
+
+/***** ASSETS ******/
+
+app.post("/api/assets/", async function (req, res) {
+  try {
+    prepareHyperledgerConnection();
+    await contract.submitTransaction(
+      "Add...",
+      req.body.id,
+      req.body.,
+      req.body.,
+      req.body.,
+      req.body.
+    );
+    console.log("Transaction has been submitted");
+    res.send("Transaction has been submitted");
+    await disconnectGateway();
+  } catch (error) {
+    console.error(`Failed to evaluate transaction: ${error}`);
+    process.exit(1);
+  }
+});
+
+app.get("/api/assets", async function (req, res) {
+  try {
+    prepareHyperledgerConnection();
+    const result = await contract.evaluateTransaction("QueryAll...");
+    console.log(`Transaction evaluated. result is: ${result.toString()}`);
+    res.status(200).json({ response: result.toString() });
+    await disconnectGateway();
+  } catch (error) {
+    console.error(`Failed to evaluate transaction: ${error}`);
+    process.exit(1);
+  }
+});
+
+app.put("/api/assets/:id", async function (req, res) {
+  try {
+    prepareHyperledgerConnection();
+    await contract.submitTransaction(
+      "Update...",
+      req.params.id,
+      req.body.newOwner
+    );
+    console.log("Transaction has been submitted");
+    res.send("Transaction has been submitted");
+    await disconnectGateway();
+  } catch (error) {
+    console.error(`Failed to evaluate transaction: ${error}`);
+    process.exit(1);
+  }
+});
+
+app.get("/api/assets/:id", async function (req, res) {
+  try {
+    prepareHyperledgerConnection();
+    const result = await contract.evaluateTransaction(
+      "Query...",
+      req.params.id
+    );
+    console.log(`Transaction. result is: ${result.toString()}`);
+    res.status(200).json({ response: result.toString() });
+    await disconnectGateway();
+  } catch (error) {
+    console.error(`Failed to evaluate transaction: ${error}`);
+    process.exit(1);
+  }
+});
+
+app.delete("/api/assets/:id", async function (req, res) {
+  try {
+    prepareHyperledgerConnection();
+    const result = await contract.evaluateTransaction(
+      "Query...",
+      req.params.id
+    );
+    console.log(`Transaction. result is: ${result.toString()}`);
+    res.status(200).json({ response: result.toString() });
+    await disconnectGateway();
+  } catch (error) {
+    console.error(`Failed to evaluate transaction: ${error}`);
+    process.exit(1);
+  }
+});
+
+
+/***** HELPERS ******/
 async function initGateway() {
   // load the network configuration
   const ccpPath = path.resolve(
@@ -104,7 +443,7 @@ async function initGateway() {
   const identity = await wallet.get("appUser");
   if (!identity) {
     console.log(
-      'An identity for the user "appUser" does not exist in the wallet'
+      `An identity for the user ${appUser} does not exist in the wallet`
     );
     console.log("Run the registerUser.js application before retrying");
     return;
@@ -114,14 +453,14 @@ async function initGateway() {
   gateway = new Gateway();
   await gateway.connect(ccp, {
     wallet,
-    identity: "appUser",
+    identity: appUser,
     discovery: { enabled: true, asLocalhost: true },
   });
 }
 
 async function loadContract() {
   const network = await gateway.getNetwork("testchannel");
-  contract = network.getContract("property");
+  contract = network.getContract("arion");
 }
 
 async function prepareHyperledgerConnection() {
