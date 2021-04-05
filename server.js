@@ -191,12 +191,14 @@ app.post("/api/asset-items/", async function (req, res) {
     await contract.submitTransaction(
       "CreateAssetItem",
       req.body.assetItemID,
-      req.body.currentOwnerID,
-      req.body.processDate,
+      req.body.ownerID,
+      req.body.stepID,
+      req.body.parentID,
       req.body.deliveryDate,
       req.body.orderPrice,
       req.body.shippingPrice,
       req.body.status,
+      req.body.quantity,
       req.body.aditionalInfoMap
     );
     console.log("Transaction has been submitted");
@@ -238,6 +240,30 @@ app.put("/api/asset-items/:id", async function (req, res) {
   }
 });
 
+app.post("/api/asset-items/:id", async function (req, res) {
+  try {
+    prepareHyperledgerConnection();
+    await contract.submitTransaction(
+      "MoveAssetItem",
+      req.body.assetItemID,
+      req.body.ownerID,
+      req.body.stepID,
+      req.body.parentID,
+      req.body.deliveryDate,
+      req.body.orderPrice,
+      req.body.shippingPrice,
+      req.body.status,
+      req.body.quantity,
+      req.body.aditionalInfoMap
+    );
+    console.log("Transaction has been submitted");
+    res.send("Transaction has been submitted");
+    await disconnectGateway();
+  } catch (error) {
+    console.error(`Failed to evaluate transaction: ${error}`);
+    process.exit(1);
+  }
+});
 app.get("/api/asset-items/:id", async function (req, res) {
   try {
     prepareHyperledgerConnection();
