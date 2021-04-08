@@ -28,9 +28,14 @@ app.post("/api/actors/", async function (req, res) {
       req.body.actorName,
       req.body.aditionalInfoMap
     );
-    console.log("Transaction has been submitted");
-    res.send("Transaction has been submitted");
     await disconnectGateway();
+    console.log("CreateActor Transaction has been submitted");
+
+    await appendObjectToAsset("AddActor", req.params.actorId, req.params.assetId)
+    console.log("AddActor Transaction has been submitted");
+
+    res.send("Transaction has been submitted");
+    
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
     process.exit(1);
@@ -112,9 +117,14 @@ app.post("/api/steps/", async function (req, res) {
       req.body.actorType,
       req.body.aditionalInfoMap
     );
-    console.log("Transaction has been submitted");
-    res.send("Transaction has been submitted");
     await disconnectGateway();
+    console.log("CreateStep Transaction has been submitted");
+
+    await appendObjectToAsset("AddStep", req.params.stepID, req.params.assetId)
+    console.log("AddStep Transaction has been submitted");
+
+    res.send("Transaction has been submitted");
+    
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
     process.exit(1);
@@ -201,9 +211,13 @@ app.post("/api/asset-items/", async function (req, res) {
       req.body.quantity,
       req.body.aditionalInfoMap
     );
-    console.log("Transaction has been submitted");
-    res.send("Transaction has been submitted");
     await disconnectGateway();
+    console.log("CreateAssetItem Transaction has been submitted");
+
+    await appendObjectToAsset("AddAssetItem", req.params.assetItemID, req.params.assetId)
+    console.log("AddAssetItemID Transaction has been submitted");
+
+    res.send("Transaction has been submitted");
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
     process.exit(1);
@@ -379,60 +393,21 @@ app.delete("/api/assets/:id", async function (req, res) {
 });
 
 app.put("/api/assets/:assetId/actors/:actorId", async function (req, res) {
-  try {
-    prepareHyperledgerConnection();
-    await contract.submitTransaction(
-      "AddActor",
-      req.params.assetId,
-      req.params.actorId
-    );
-    console.log("Transaction has been submitted");
-    res.send("Transaction has been submitted");
-    await disconnectGateway();
-  } catch (error) {
-    console.error(`Failed to evaluate transaction: ${error}`);
-    process.exit(1);
-  }
+  await appendObjectToAsset("AddActor", req.params.actorId, req.params.assetId)
 });
 
 app.put("/api/assets/:assetId/steps/:stepId", async function (req, res) {
-  try {
-    prepareHyperledgerConnection();
-    await contract.submitTransaction(
-      "AddStep",
-      req.params.assetId,
-      req.params.stepId
-    );
-    console.log("Transaction has been submitted");
-    res.send("Transaction has been submitted");
-    await disconnectGateway();
-  } catch (error) {
-    console.error(`Failed to evaluate transaction: ${error}`);
-    process.exit(1);
-  }
+  await appendObjectToAsset("AddStep", req.params.stepId, req.params.assetId)
 });
 
 app.put(
   "/api/assets/:assetId/asset-items/:assetItemId",
   async function (req, res) {
-    try {
-      prepareHyperledgerConnection();
-      await contract.submitTransaction(
-        "AddAssetItem",
-        req.params.assetId,
-        req.params.assetItemId
-      );
-      console.log("Transaction has been submitted");
-      res.send("Transaction has been submitted");
-      await disconnectGateway();
-    } catch (error) {
-      console.error(`Failed to evaluate transaction: ${error}`);
-      process.exit(1);
-    }
-  }
+    await appendObjectToAsset("AddAssetItem", req.params.assetItemId, req.params.assetId)
 );
 
 /***** HELPERS ******/
+
 async function initGateway() {
   // load the network configuration
   const ccpPath = path.resolve(
@@ -479,6 +454,23 @@ async function loadContract() {
 async function prepareHyperledgerConnection() {
   await initGateway();
   await loadContract();
+}
+
+async function appendObjectToAsset(itemId, assetID, functionName) {
+  try {
+    prepareHyperledgerConnection();
+    await contract.submitTransaction(
+      functionName,
+      itemId,
+      assetID
+    );
+    console.log("Transaction has been submitted");
+    res.send("Transaction has been submitted");
+    await disconnectGateway();
+  } catch (error) {
+    console.error(`Failed to evaluate transaction: ${error}`);
+    process.exit(1);
+  }
 }
 
 async function disconnectGateway() {
