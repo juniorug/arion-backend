@@ -10,6 +10,13 @@ async function main() {
     const ccpPath = path.resolve(
       __dirname,
       "..",
+      "..",
+      "..",
+      "..",
+      "..",
+      "fabric-samples",
+      "udemy_course",
+      "Fabric2.2",
       "fabric-samples",
       "test-network",
       "organizations",
