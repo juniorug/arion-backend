@@ -1,0 +1,882 @@
+{
+	"info": {
+		"_postman_id": "b0814948-6c29-4b5a-9c0a-7e757a37a11c",
+		"name": "Arion",
+		"description": "API's collection for Arion project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Asset",
+			"item": [
+				{
+					"name": "Asset",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"assetID\": \"1\",\n    \"assetName\": \"Gravel\",\n    \"aditionalInfoMap\": \"{}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlArion}}/{{api}}/{{assets}}",
+							"host": [
+								"{{urlArion}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{assets}}"
+							]
+						},
+						"description": "Add a new Actor to the blockchain"
+					},
+					"response": []
+				},
+				{
+					"name": "Asset",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urlArion}}/{{api}}/{{assets}}",
+							"host": [
+								"{{urlArion}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{assets}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Asset by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urlArion}}/{{api}}/{{assets}}/1",
+							"host": [
+								"{{urlArion}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{assets}}",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Asset by Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{urlArion}}/{{api}}/{{assets}}/1",
+							"host": [
+								"{{urlArion}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{assets}}",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Asset by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{urlArion}}/{{api}}/{{assets}}/1",
+							"host": [
+								"{{urlArion}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{assets}}",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Actor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": ""
+						},
+						"description": "Add a new Actor to the blockchain"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Step",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": ""
+						},
+						"description": "Add a new Actor to the blockchain"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Asset  Item",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": ""
+						},
+						"description": "Add a new Actor to the blockchain"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Actor",
+			"item": [
+				{
+					"name": "Actor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var actors = pm.environment.get(\"actors\");",
+									"",
+									"if (actors && actors.lenght > 0) {",
+									"    postman.setNextRequest(\"{{urlArion}}/{{api}}/{{actors}}\");",
+									"} else {",
+									"    postman.setNextRequest(null);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var actorList = pm.environment.get(\"actorList\");",
+									"",
+									"if (actorList.length < 1) {",
+									"    actorList = [",
+									"      {",
+									"         \"actorID\":\"1\",",
+									"         \"assetID\":\"1\",",
+									"         \"actorType\":\"rawMaterial\",",
+									"         \"actorName\":\"James JohnsonX9\",",
+									"         \"deleted\":false,",
+									"         \"aditionalInfoMap\":\"{}\"",
+									"      },",
+									"      {",
+									"         \"actorID\":\"2\",",
+									"         \"assetID\":\"1\",",
+									"         \"actorType\":\"manufacturer\",",
+									"         \"actorName\":\"Donald Jackson\",",
+									"         \"deleted\":false,",
+									"         \"aditionalInfoMap\":\"{}\"",
+									"      }",
+									"   ];",
+									"} ",
+									"",
+									"var currentActor = actorList.shift();",
+									"pm.environment.set(\"actor\", currentActor);",
+									"pm.environment.set(\"actorList\", actorList);",
+									"",
+									"pm.environment.set(\"actorID\", currentActor.actorID);",
+									"pm.environment.set(\"assetID\", currentActor.assetID);",
+									"pm.environment.set(\"actorType\", currentActor.actorType);",
+									"pm.environment.set(\"actorName\", currentActor.actorName);",
+									"pm.environment.set(\"deleted\", currentActor.deleted);",
+									"pm.environment.set(\"aditionalInfoMap\", currentActor.aditionalInfoMap);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"actorID\": \"{{actorID}}\",\n    \"assetID\": \"{{assetID}}\",\n    \"actorType\": \"{{actorType}}\",\n    \"actorName\": \"{{actorName}}\",\n    \"aditionalInfoMap\":  \"{{aditionalInfoMap}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlArion}}/{{api}}/{{actors}}",
+							"host": [
+								"{{urlArion}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{actors}}"
+							]
+						},
+						"description": "Add a new Actor to the blockchain"
+					},
+					"response": []
+				},
+				{
+					"name": "Actor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urlArion}}/{{api}}/{{actors}}",
+							"host": [
+								"{{urlArion}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{actors}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actor by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urlArion}}/{{api}}/{{actors}}/1",
+							"host": [
+								"{{urlArion}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{actors}}",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actor by Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{urlArion}}/{{api}}/{{actors}}/1",
+							"host": [
+								"{{urlArion}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{actors}}",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actor by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{urlArion}}/{{api}}/{{actors}}/1",
+							"host": [
+								"{{urlArion}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{actors}}",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Steps",
+			"item": [
+				{
+					"name": "Step",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var steps = pm.environment.get(\"steps\");",
+									"",
+									"if (steps && steps.lenght > 0) {",
+									"    postman.setNextRequest(\"{{urlArion}}/{{api}}/{{steps}}\");",
+									"} else {",
+									"    postman.setNextRequest(null);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var stepList = pm.environment.get(\"stepList\");",
+									"",
+									"if (!stepList) {",
+									"    stepList = [",
+									"      {",
+									"         \"stepID\":\"1\",",
+									"         \"stepName\":\"exploration\",",
+									"         \"stepOrder\":1,",
+									"         \"actorType\":\"rawMaterial\",",
+									"         \"deleted\":false,",
+									"         \"aditionalInfoMap\":{",
+									"         }",
+									"      },",
+									"      {",
+									"         \"stepID\":\"2\",",
+									"         \"stepName\":\"production\",",
+									"         \"stepOrder\":2,",
+									"         \"actorType\":\"manufacturer\",",
+									"         \"deleted\":false,",
+									"         \"aditionalInfoMap\":{",
+									"         }",
+									"      }",
+									"   ];",
+									"}",
+									"",
+									"var currentStep = stepList.shift();",
+									"pm.environment.set(\"step\", currentStep);",
+									"pm.environment.set(\"stepList\", stepList);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"stepID\": \"{{step.stepID}}\",\n    \"assetID\": \"{{step.assetID}}\",\n    \"stepName\": \"{{step.stepName}}\",\n    \"stepOrder\": \"{{step.stepOrder}}\",\n    \"actorType\": \"{{step.actorType}}\",\n    \"aditionalInfoMap\": \"{{step.aditionalInfoMap}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlArion}}/{{api}}/{{steps}}",
+							"host": [
+								"{{urlArion}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{steps}}"
+							]
+						},
+						"description": "Add a new Actor to the blockchain"
+					},
+					"response": []
+				},
+				{
+					"name": "Step",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urlArion}}/{{api}}/{{steps}}",
+							"host": [
+								"{{urlArion}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{steps}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Step by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urlArion}}/{{api}}/{{steps}}/1",
+							"host": [
+								"{{urlArion}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{steps}}",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Step by Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{urlArion}}/{{api}}/{{steps}}/1",
+							"host": [
+								"{{urlArion}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{steps}}",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Step by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{urlArion}}/{{api}}/{{steps}}/1",
+							"host": [
+								"{{urlArion}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{steps}}",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Asset Item",
+			"item": [
+				{
+					"name": "Asset Item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var assetItemList = pm.environment.get(\"assetItemList\");",
+									"",
+									"if (!assetItemList) {",
+									"    assetItemList = [",
+									"      {",
+									"         \"assetItemID\":\"1\",",
+									"         \"ownerID\":\"1\",",
+									"         \"stepID\":\"1\",",
+									"         \"parentID\":\"0\",",
+									"         \"processDate\":\"2021-04-11 21:49:49\",",
+									"         \"deliveryDate\":\"2020-03-07T15:04:05\",",
+									"         \"orderPrice\":\"\",",
+									"         \"shippingPrice\":\"\",",
+									"         \"status\":\"order initiated\",",
+									"         \"quantity\":\"2\",",
+									"         \"deleted\":false,",
+									"         \"aditionalInfoMap\": {}",
+									"      },",
+									"      {",
+									"         \"assetItemID\":\"2\",",
+									"         \"ownerID\":\"1\",",
+									"         \"stepID\":\"1\",",
+									"         \"parentID\":\"0\",",
+									"         \"processDate\":\"2021-04-11 21:49:58\",",
+									"         \"deliveryDate\":\"2020-03-07T15:04:05\",",
+									"         \"orderPrice\":\"\",",
+									"         \"shippingPrice\":\"\",",
+									"         \"status\":\"order initiated\",",
+									"         \"quantity\":\"2\",",
+									"         \"deleted\":false,",
+									"         \"aditionalInfoMap\": {}",
+									"      }",
+									"   ];",
+									"}",
+									"",
+									"var currentAssetItem = assetItemList.shift();",
+									"pm.environment.set(\"assetItem\", currentAssetItem);",
+									"pm.environment.set(\"assetItemList\", assetItemList);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"assetItemID\": \"{{assetItem.assetItemID}}\",\n    \"assetID\": \"{{assetItem.assetID}}\",\n    \"ownerID\":\"{{assetItem.ownerID}}\",\n    \"stepID\": \"{{assetItem.stepID}}\",\n    \"deliveryDate\": \"{{assetItem.deliveryDate}}\",\n    \"orderPrice\": \"{{assetItem.orderPrice}}\",\n    \"shippingPrice\": \"{{assetItem.shippingPrice}}\",\n    \"status\": \"{{assetItem.status}}\",\n    \"quantity\": \"{{assetItem.quantity}}\",\n    \"aditionalInfoMap\": \"{{assetItem.aditionalInfoMap}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlArion}}/{{api}}/{{asset-items}}",
+							"host": [
+								"{{urlArion}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{asset-items}}"
+							]
+						},
+						"description": "Add a new Asset Item to the blockchain"
+					},
+					"response": []
+				},
+				{
+					"name": "Asset Item",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urlArion}}/{{api}}/{{asset-items}}",
+							"host": [
+								"{{urlArion}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{asset-items}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Asset Item by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urlArion}}/{{api}}/{{asset-items}}/1",
+							"host": [
+								"{{urlArion}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{asset-items}}",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Asset Item by Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{urlArion}}/{{api}}/{{asset-items}}/1",
+							"host": [
+								"{{urlArion}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{asset-items}}",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Asset Item by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{urlArion}}/{{api}}/{{asset-items}}/1",
+							"host": [
+								"{{urlArion}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{asset-items}}",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Move Asset Item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var assetItemList = pm.environment.get(\"assetItemList\");",
+									"",
+									"if (!assetItemList) {",
+									"    assetItemList = [",
+									"    {",
+									"        \"assetItemID\": \"1\",",
+									"        \"newAssetItemID\": \"3\",",
+									"        \"stepID\": \"2\",",
+									"        \"newOwnerID\": \"2\",",
+									"        \"assetID\": \"1\",",
+									"        \"orderPrice\": \"50\",",
+									"        \"shippingPrice\": \"5\",",
+									"        \"status\": \"producing\",",
+									"        \"quantity\": \"1\",",
+									"        \"aditionalInfoMap\": \"{}\"",
+									"    },",
+									"    {",
+									"        \"assetItemID\": \"1\",",
+									"        \"newAssetItemID\": \"4\",",
+									"        \"stepID\": \"2\",",
+									"        \"newOwnerID\": \"2\",",
+									"        \"assetID\": \"1\",",
+									"        \"orderPrice\": \"50\",",
+									"        \"shippingPrice\": \"5\",",
+									"        \"status\": \"producing\",",
+									"        \"quantity\": \"1\",",
+									"        \"aditionalInfoMap\": \"{}\"",
+									"    }",
+									"];",
+									"}",
+									"",
+									"var currentAssetItem = assetItemList.shift();",
+									"pm.environment.set(\"assetItem\", currentAssetItem);",
+									"pm.environment.set(\"assetItemList\", assetItemList);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"assetItemID\": {{assetItem.assetItemID}},\n    \"newAssetItemID\": {{assetItem.newAssetItemID}},\n    \"stepID\": {{assetItem.stepID}},\n    \"newOwnerID\": {{assetItem.newOwnerID}},\n    \"assetID\": {{assetItem.assetID}},\n    \"orderPrice\": {{assetItem.orderPrice}},\n    \"shippingPrice\": {{assetItem.shippingPrice}},\n    \"status\": {{assetItem.status}},\n    \"quantity\": {{assetItem.quantity}},\n    \"aditionalInfoMap\": {{assetItem.aditionalInfoMap}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlArion}}/{{api}}/{{asset-items}}/1",
+							"host": [
+								"{{urlArion}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{asset-items}}",
+								"1"
+							]
+						},
+						"description": "Moves an assetId from one step to another"
+					},
+					"response": []
+				},
+				{
+					"name": "Track Asset Item by Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var assetItemIds = pm.environment.get(\"assetItemIds\");",
+									"",
+									"if (!assetItemIds) {",
+									"    assetItemIds = [\"1\",\"3\",\"4\"];",
+									"}",
+									"",
+									"var currentAssetItemId = assetItemIds.shift();",
+									"pm.environment.set(\"assetItemId\", currentAssetItemId);",
+									"pm.environment.set(\"assetItemIds\", assetItemIds);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urlArion}}/{{api}}/{{asset-items}}/track/{{assetItemId}}",
+							"host": [
+								"{{urlArion}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{asset-items}}",
+								"track",
+								"{{assetItemId}}"
+							]
+						},
+						"description": "Tracks an asset through the supply chain"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "urlArion",
+			"value": "http://localhost:8080"
+		},
+		{
+			"key": "api",
+			"value": "api"
+		},
+		{
+			"key": "actors",
+			"value": "actors"
+		},
+		{
+			"key": "assets",
+			"value": "assets"
+		},
+		{
+			"key": "steps",
+			"value": "steps"
+		},
+		{
+			"key": "asset-items",
+			"value": "asset-items"
+		}
+	]
+}

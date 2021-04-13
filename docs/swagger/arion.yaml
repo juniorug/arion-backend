@@ -1,0 +1,1199 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: Arion
+  description: API's collection for Arion project
+  contact: {}
+  x-codegen-settings:
+    Nullify404: false
+    GenerateAsyncCode: true
+    UseMethodPrefix: false
+    UseModelPostfix: false
+    UseControllerPrefix: true
+    UseEnumPostfix: true
+    CollectParameters: false
+    UseConstructorsForConfig: false
+    UseCommonSDKLibrary: false
+    iOSUseAppInfoPlist: false
+    AndroidUseAppManifest: false
+    BodySerialization: 0
+    EnableAdditionalModelProperties: false
+    PreserveParameterOrder: true
+    AppendContentHeaders: true
+    iOSGenerateCoreData: false
+    GenerateInterfaces: false
+    NodeHttpClient: NODE_REQUEST
+    ValidateRequiredParameters: false
+    JavaUsePropertiesConfig: false
+    Timeout: 0
+    StoreTimezoneInformation: false
+    EnablePHPComposerVersionString: false
+    EnableLogging: false
+    ArraySerialization: Indexed
+    ModelSerializationScheme: Json
+    UseExceptionPrefix: true
+    RunscopeEnabled: false
+    AndroidHttpClient: ANDROID_OK
+    ObjCHttpClient: UNIREST
+    CSharpHttpClient: UNIREST
+    PHPHttpClient: UNIREST
+    JavaHttpClient: JAVA_OK
+    ParameterArrayFormat: ParamArrayWithIndex
+    SecurityProtocols:
+    - Ssl3
+    - Tls
+    GenerateTravisConfig: false
+    GenerateCircleConfig: false
+    GenerateAppveyorConfig: false
+    GenerateJenkinsConfig: false
+    EnableHttpCache: false
+    Retries: 0
+    RetryInterval: 1
+    GenerateAdvancedDocs: true
+    UnderscoreNumbers: true
+    UseSingletonPattern: true
+    DisableLinting: false
+    ApplyCustomizations: []
+    SortResources: false
+    AllowSkippingSSLCertVerification: false
+    DoNotSplitWords: []
+    EnableGlobalUserAgent: true
+    ReturnCompleteHttpResponse: false
+    GenerateModels: true
+    GenerateExceptions: true
+    IgnoreIfNullJson: false
+    DisableDocs: false
+    LiftParameterDescriptionFromCustomType: false
+    ThrowForHttpErrorStatusCodes: true
+    ResponseMapping:
+      Type: Simple
+    ForceKeywordArgsInRuby: false
+    SymbolizeHashKeysInRuby: false
+    UsageExampleEndpoint:
+      Description: ''
+      EndpointGroupName: ''
+      EndpointName: ''
+    IsLatestVersion: false
+    EnableImmutableModels: false
+    GenerateEnums: true
+    BackoffFactor: 2
+    StatusCodesToRetry:
+    - 408
+    - 413
+    - 429
+    - 500
+    - 502
+    - 503
+    - 504
+    - 521
+    - 522
+    - 524
+    RequestMethodsToRetry:
+    - GET
+    - PUT
+    UserConfigurableRetries: true
+    UseEndpointMethodName: false
+    EncodeTemplateParameters: true
+    GenerateExamplesForOptionalFields: false
+    MultitargetDotnetVersions: false
+    BackoffMax: 0
+    RetryOnTimeout: true
+  x-server-configuration:
+    default-environment: local
+    default-server: Server 1
+    environments:
+    - name: local
+      servers:
+      - name: Server 1
+        url: http://localhost:8080/api
+    parameters: []
+  x-image-uri: ''
+host: localhost:8080
+basePath: /api
+schemes:
+- http
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /actors:
+    post:
+      description: Add a new Actor to the blockchain
+      summary: Actor
+      tags:
+      - Actor
+      operationId: Actor
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: Body
+        in: body
+        required: true
+        x-example:
+          actorID: '{{actor.actorID}}'
+          assetID: '{{actor.assetID}}'
+          actorType: '{{actor.actorType}}'
+          actorName: '{{actor.actorName}}'
+          aditionalInfoMap: '{{actor.aditionalInfoMap}}'
+        description: ''
+        schema:
+          $ref: '#/definitions/ActorRequest'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      x-unitTests:
+      - request:
+          method: POST
+          uri: /actors
+          headers:
+            Content-Type: application/json
+          body: >-
+            {
+
+              "actorID": "{{actor.actorID}}",
+
+              "assetID": "{{actor.assetID}}",
+
+              "actorType": "{{actor.actorType}}",
+
+              "actorName": "{{actor.actorName}}",
+
+              "aditionalInfoMap": "{{actor.aditionalInfoMap}}"
+
+            }
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Actor
+        x-testDescription: Add a new Actor to the blockchain
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    get:
+      summary: Actor
+      tags:
+      - Actor
+      operationId: GetActor
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /actors
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Actor1
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /actors/1:
+    get:
+      summary: Actor by Id
+      tags:
+      - Actor
+      operationId: ActorbyId
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /actors/1
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Actor by Id
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    put:
+      summary: Actor by Id1
+      tags:
+      - Actor
+      operationId: ActorbyId1
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      x-unitTests:
+      - request:
+          method: PUT
+          uri: /actors/1
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Actor by Id1
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      summary: Actor by Id2
+      tags:
+      - Actor
+      operationId: ActorbyId2
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      x-unitTests:
+      - request:
+          method: DELETE
+          uri: /actors/1
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Actor by Id2
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /steps:
+    post:
+      description: Add a new Actor to the blockchain
+      summary: Step
+      tags:
+      - Steps
+      operationId: Step
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: Body
+        in: body
+        required: true
+        x-example:
+          stepID: '{{step.stepID}}'
+          assetID: '{{step.assetID}}'
+          stepName: '{{step.stepName}}'
+          stepOrder: '{{step.stepOrder}}'
+          actorType: '{{step.actorType}}'
+          aditionalInfoMap: '{{step.aditionalInfoMap}}'
+        description: ''
+        schema:
+          $ref: '#/definitions/StepRequest'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      x-unitTests:
+      - request:
+          method: POST
+          uri: /steps
+          headers:
+            Content-Type: application/json
+          body: >-
+            {
+
+              "stepID": "{{step.stepID}}",
+
+              "assetID": "{{step.assetID}}",
+
+              "stepName": "{{step.stepName}}",
+
+              "stepOrder": "{{step.stepOrder}}",
+
+              "actorType": "{{step.actorType}}",
+
+              "aditionalInfoMap": "{{step.aditionalInfoMap}}"
+
+            }
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Step
+        x-testDescription: Add a new Actor to the blockchain
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    get:
+      summary: Step
+      tags:
+      - Steps
+      operationId: GetStep
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /steps
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Step1
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /steps/1:
+    get:
+      summary: Step by Id
+      tags:
+      - Steps
+      operationId: StepbyId
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /steps/1
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Step by Id
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    put:
+      summary: Step by Id1
+      tags:
+      - Steps
+      operationId: StepbyId1
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      x-unitTests:
+      - request:
+          method: PUT
+          uri: /steps/1
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Step by Id1
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      summary: Step by Id2
+      tags:
+      - Steps
+      operationId: StepbyId2
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      x-unitTests:
+      - request:
+          method: DELETE
+          uri: /steps/1
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Step by Id2
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /asset-items:
+    post:
+      description: Add a new Asset Item to the blockchain
+      summary: Asset Item
+      tags:
+      - Asset Item
+      operationId: AssetItem
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: Body
+        in: body
+        required: true
+        x-example:
+          assetItemID: '{{assetItem.assetItemID}}'
+          assetID: '{{assetItem.assetID}}'
+          ownerID: '{{assetItem.ownerID}}'
+          stepID: '{{assetItem.stepID}}'
+          deliveryDate: '{{assetItem.deliveryDate}}'
+          orderPrice: '{{assetItem.orderPrice}}'
+          shippingPrice: '{{assetItem.shippingPrice}}'
+          status: '{{assetItem.status}}'
+          quantity: '{{assetItem.quantity}}'
+          aditionalInfoMap: '{{assetItem.aditionalInfoMap}}'
+        description: ''
+        schema:
+          $ref: '#/definitions/AssetItemRequest'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      x-unitTests:
+      - request:
+          method: POST
+          uri: /asset-items
+          headers:
+            Content-Type: application/json
+          body: >-
+            {
+
+              "assetItemID": "{{assetItem.assetItemID}}",
+
+              "assetID": "{{assetItem.assetID}}",
+
+              "ownerID": "{{assetItem.ownerID}}",
+
+              "stepID": "{{assetItem.stepID}}",
+
+              "deliveryDate": "{{assetItem.deliveryDate}}",
+
+              "orderPrice": "{{assetItem.orderPrice}}",
+
+              "shippingPrice": "{{assetItem.shippingPrice}}",
+
+              "status": "{{assetItem.status}}",
+
+              "quantity": "{{assetItem.quantity}}",
+
+              "aditionalInfoMap": "{{assetItem.aditionalInfoMap}}"
+
+            }
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Asset Item
+        x-testDescription: Add a new Asset Item to the blockchain
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    get:
+      summary: Asset Item
+      tags:
+      - Asset Item
+      operationId: GetAssetItem
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /asset-items
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Asset Item1
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /asset-items/1:
+    get:
+      summary: Asset Item by Id
+      tags:
+      - Asset Item
+      operationId: AssetItembyId
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /asset-items/1
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Asset Item by Id
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    put:
+      summary: Asset Item by Id1
+      tags:
+      - Asset Item
+      operationId: AssetItembyId1
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      x-unitTests:
+      - request:
+          method: PUT
+          uri: /asset-items/1
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Asset Item by Id1
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      summary: Asset Item by Id2
+      tags:
+      - Asset Item
+      operationId: AssetItembyId2
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      x-unitTests:
+      - request:
+          method: DELETE
+          uri: /asset-items/1
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Asset Item by Id2
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    post:
+      description: Moves an assetId from one step to another
+      summary: Move Asset Item
+      tags:
+      - Asset Item
+      operationId: MoveAssetItem
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: Body
+        in: body
+        required: true
+        x-example: >-
+          {
+              "assetItemID": {{assetItem.assetItemID}},
+              "newAssetItemID": {{assetItem.newAssetItemID}},
+              "stepID": {{assetItem.stepID}},
+              "newOwnerID": {{assetItem.newOwnerID}},
+              "assetID": {{assetItem.assetID}},
+              "orderPrice": {{assetItem.orderPrice}},
+              "shippingPrice": {{assetItem.shippingPrice}},
+              "status": {{assetItem.status}},
+              "quantity": {{assetItem.quantity}},
+              "aditionalInfoMap": {{assetItem.aditionalInfoMap}}
+          }
+        description: ''
+        schema:
+          example: >-
+            {
+                "assetItemID": {{assetItem.assetItemID}},
+                "newAssetItemID": {{assetItem.newAssetItemID}},
+                "stepID": {{assetItem.stepID}},
+                "newOwnerID": {{assetItem.newOwnerID}},
+                "assetID": {{assetItem.assetID}},
+                "orderPrice": {{assetItem.orderPrice}},
+                "shippingPrice": {{assetItem.shippingPrice}},
+                "status": {{assetItem.status}},
+                "quantity": {{assetItem.quantity}},
+                "aditionalInfoMap": {{assetItem.aditionalInfoMap}}
+            }
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      x-unitTests:
+      - request:
+          method: POST
+          uri: /asset-items/1
+          headers:
+            Content-Type: text/plain
+          body: >-
+            {
+                "assetItemID": {{assetItem.assetItemID}},
+                "newAssetItemID": {{assetItem.newAssetItemID}},
+                "stepID": {{assetItem.stepID}},
+                "newOwnerID": {{assetItem.newOwnerID}},
+                "assetID": {{assetItem.assetID}},
+                "orderPrice": {{assetItem.orderPrice}},
+                "shippingPrice": {{assetItem.shippingPrice}},
+                "status": {{assetItem.status}},
+                "quantity": {{assetItem.quantity}},
+                "aditionalInfoMap": {{assetItem.aditionalInfoMap}}
+            }
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Move Asset Item
+        x-testDescription: Moves an assetId from one step to another
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /asset-items/track/1:
+    get:
+      description: Tracks an asset through the supply chain
+      summary: Track Asset Item by Id
+      tags:
+      - Asset Item
+      operationId: TrackAssetItembyId
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /asset-items/track/1
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Track Asset Item by Id
+        x-testDescription: Tracks an asset through the supply chain
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /assets:
+    post:
+      description: Add a new Actor to the blockchain
+      summary: Asset
+      tags:
+      - Asset
+      operationId: Asset
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: Body
+        in: body
+        required: true
+        x-example:
+          assetID: '1'
+          assetName: Gravel
+          aditionalInfoMap: '{}'
+        description: ''
+        schema:
+          $ref: '#/definitions/AssetRequest'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      x-unitTests:
+      - request:
+          method: POST
+          uri: /assets
+          headers:
+            Content-Type: application/json
+          body: >-
+            {
+
+              "assetID": "1",
+
+              "assetName": "Gravel",
+
+              "aditionalInfoMap": "{}"
+
+            }
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Asset
+        x-testDescription: Add a new Actor to the blockchain
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    get:
+      summary: Asset
+      tags:
+      - Asset
+      operationId: GetAsset
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /assets
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Asset1
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /assets/1:
+    get:
+      summary: Asset by Id
+      tags:
+      - Asset
+      operationId: AssetbyId
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /assets/1
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Asset by Id
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    put:
+      summary: Asset by Id1
+      tags:
+      - Asset
+      operationId: AssetbyId1
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      x-unitTests:
+      - request:
+          method: PUT
+          uri: /assets/1
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Asset by Id1
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      summary: Asset by Id2
+      tags:
+      - Asset
+      operationId: AssetbyId2
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      x-unitTests:
+      - request:
+          method: DELETE
+          uri: /assets/1
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Asset by Id2
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /:
+    post:
+      description: Add a new Actor to the blockchain
+      summary: Add Actor
+      tags:
+      - Asset
+      operationId: AddActor
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      x-unitTests:
+      - request:
+          method: POST
+          uri: /
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          statusCode: '200'
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Add Actor
+        x-testDescription: Add a new Actor to the blockchain
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+definitions:
+  ActorRequest:
+    title: ActorRequest
+    example:
+      actorID: '{{actor.actorID}}'
+      assetID: '{{actor.assetID}}'
+      actorType: '{{actor.actorType}}'
+      actorName: '{{actor.actorName}}'
+      aditionalInfoMap: '{{actor.aditionalInfoMap}}'
+    type: object
+    properties:
+      actorID:
+        type: string
+      assetID:
+        type: string
+      actorType:
+        type: string
+      actorName:
+        type: string
+      aditionalInfoMap:
+        type: string
+    required:
+    - actorID
+    - assetID
+    - actorType
+    - actorName
+    - aditionalInfoMap
+  StepRequest:
+    title: StepRequest
+    example:
+      stepID: '{{step.stepID}}'
+      assetID: '{{step.assetID}}'
+      stepName: '{{step.stepName}}'
+      stepOrder: '{{step.stepOrder}}'
+      actorType: '{{step.actorType}}'
+      aditionalInfoMap: '{{step.aditionalInfoMap}}'
+    type: object
+    properties:
+      stepID:
+        type: string
+      assetID:
+        type: string
+      stepName:
+        type: string
+      stepOrder:
+        type: string
+      actorType:
+        type: string
+      aditionalInfoMap:
+        type: string
+    required:
+    - stepID
+    - assetID
+    - stepName
+    - stepOrder
+    - actorType
+    - aditionalInfoMap
+  AssetItemRequest:
+    title: AssetItemRequest
+    example:
+      assetItemID: '{{assetItem.assetItemID}}'
+      assetID: '{{assetItem.assetID}}'
+      ownerID: '{{assetItem.ownerID}}'
+      stepID: '{{assetItem.stepID}}'
+      deliveryDate: '{{assetItem.deliveryDate}}'
+      orderPrice: '{{assetItem.orderPrice}}'
+      shippingPrice: '{{assetItem.shippingPrice}}'
+      status: '{{assetItem.status}}'
+      quantity: '{{assetItem.quantity}}'
+      aditionalInfoMap: '{{assetItem.aditionalInfoMap}}'
+    type: object
+    properties:
+      assetItemID:
+        type: string
+      assetID:
+        type: string
+      ownerID:
+        type: string
+      stepID:
+        type: string
+      deliveryDate:
+        type: string
+      orderPrice:
+        type: string
+      shippingPrice:
+        type: string
+      status:
+        type: string
+      quantity:
+        type: string
+      aditionalInfoMap:
+        type: string
+    required:
+    - assetItemID
+    - assetID
+    - ownerID
+    - stepID
+    - deliveryDate
+    - orderPrice
+    - shippingPrice
+    - status
+    - quantity
+    - aditionalInfoMap
+  AssetRequest:
+    title: AssetRequest
+    example:
+      assetID: '1'
+      assetName: Gravel
+      aditionalInfoMap: '{}'
+    type: object
+    properties:
+      assetID:
+        type: string
+      assetName:
+        type: string
+      aditionalInfoMap:
+        type: string
+    required:
+    - assetID
+    - assetName
+    - aditionalInfoMap
+tags:
+- name: Actor
+- name: Steps
+- name: Asset Item
+- name: Asset
