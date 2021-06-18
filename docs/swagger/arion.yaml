@@ -120,10 +120,10 @@ paths:
   /actors:
     post:
       description: Add a new Actor to the blockchain
-      summary: Actor
+      summary: Creates a new actor
       tags:
-      - Actor
-      operationId: Actor
+      - Actors
+      operationId: Actors
       deprecated: false
       produces:
       - application/json
@@ -182,9 +182,9 @@ paths:
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
     get:
-      summary: Actor
+      summary: Retrieves actors
       tags:
-      - Actor
+      - Actors
       operationId: GetActor
       deprecated: false
       produces:
@@ -214,11 +214,11 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
-  /actors/1:
+  /actors/{actorID}:
     get:
-      summary: Actor by Id
+      summary: Retrieves an existing actor.
       tags:
-      - Actor
+      - Actors
       operationId: ActorbyId
       deprecated: false
       produces:
@@ -249,9 +249,9 @@ paths:
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
     put:
-      summary: Actor by Id1
+      summary: Updates an existing actor.
       tags:
-      - Actor
+      - Actors
       operationId: ActorbyId1
       deprecated: false
       produces:
@@ -282,9 +282,9 @@ paths:
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
     delete:
-      summary: Actor by Id2
+      summary: Removes an existing actor.
       tags:
-      - Actor
+      - Actors
       operationId: ActorbyId2
       deprecated: false
       produces:
@@ -317,7 +317,7 @@ paths:
   /steps:
     post:
       description: Add a new Actor to the blockchain
-      summary: Step
+      summary:  Creates a new step
       tags:
       - Steps
       operationId: Step
@@ -382,7 +382,7 @@ paths:
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
     get:
-      summary: Step
+      summary: Retrieves steps
       tags:
       - Steps
       operationId: GetStep
@@ -414,9 +414,9 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
-  /steps/1:
+  /steps/{stepID}:
     get:
-      summary: Step by Id
+      summary: Retrieves an existing step
       tags:
       - Steps
       operationId: StepbyId
@@ -449,7 +449,7 @@ paths:
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
     put:
-      summary: Step by Id1
+      summary: Updates an existing step
       tags:
       - Steps
       operationId: StepbyId1
@@ -482,7 +482,7 @@ paths:
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
     delete:
-      summary: Step by Id2
+      summary: Removes an existing step
       tags:
       - Steps
       operationId: StepbyId2
@@ -516,10 +516,10 @@ paths:
         IsMultiContentStreaming: false
   /asset-items:
     post:
-      description: Add a new Asset Item to the blockchain
-      summary: Asset Item
+      description: Creates a new asset Item
+      summary: Creates a new asset Item
       tags:
-      - Asset Item
+      - Asset Items
       operationId: AssetItem
       deprecated: false
       produces:
@@ -594,9 +594,9 @@ paths:
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
     get:
-      summary: Asset Item
+      summary: Retrieves asset items
       tags:
-      - Asset Item
+      - Asset Items
       operationId: GetAssetItem
       deprecated: false
       produces:
@@ -626,11 +626,11 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
-  /asset-items/1:
+  /asset-items/{assetItemID}:
     get:
-      summary: Asset Item by Id
+      summary: Retrieves an existing asset item
       tags:
-      - Asset Item
+      - Asset Items
       operationId: AssetItembyId
       deprecated: false
       produces:
@@ -661,9 +661,9 @@ paths:
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
     put:
-      summary: Asset Item by Id1
+      summary: Updates an existing asset item
       tags:
-      - Asset Item
+      - Asset Items
       operationId: AssetItembyId1
       deprecated: false
       produces:
@@ -694,9 +694,9 @@ paths:
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
     delete:
-      summary: Asset Item by Id2
+      summary: Removes an existing asset item
       tags:
-      - Asset Item
+      - Asset Items
       operationId: AssetItembyId2
       deprecated: false
       produces:
@@ -727,10 +727,10 @@ paths:
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
     post:
-      description: Moves an assetId from one step to another
+      description: Moves an asset item from one step to another
       summary: Move Asset Item
       tags:
-      - Asset Item
+      - Asset Items
       operationId: MoveAssetItem
       deprecated: false
       produces:
@@ -808,12 +808,12 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
-  /asset-items/track/1:
+  /asset-items/track/{assetItemID}:
     get:
       description: Tracks an asset through the supply chain
-      summary: Track Asset Item by Id
+      summary: Tracks an existing asset item
       tags:
-      - Asset Item
+      - Asset Items
       operationId: TrackAssetItembyId
       deprecated: false
       produces:
@@ -847,9 +847,9 @@ paths:
   /assets:
     post:
       description: Add a new Actor to the blockchain
-      summary: Asset
+      summary: Creates a new asset
       tags:
-      - Asset
+      - Assets
       operationId: Asset
       deprecated: false
       produces:
@@ -903,9 +903,9 @@ paths:
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
     get:
-      summary: Asset
+      summary: Retrieves assets
       tags:
-      - Asset
+      - Assets
       operationId: GetAsset
       deprecated: false
       produces:
@@ -935,11 +935,11 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
-  /assets/1:
+  /assets/{assetID}:
     get:
-      summary: Asset by Id
+      summary: Retrieves an existing asset
       tags:
-      - Asset
+      - Assets
       operationId: AssetbyId
       deprecated: false
       produces:
@@ -970,9 +970,9 @@ paths:
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
     put:
-      summary: Asset by Id1
+      summary: Updates an existing asset
       tags:
-      - Asset
+      - Assets
       operationId: AssetbyId1
       deprecated: false
       produces:
@@ -1003,9 +1003,9 @@ paths:
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
     delete:
-      summary: Asset by Id2
+      summary: Removes an existing asset
       tags:
-      - Asset
+      - Assets
       operationId: AssetbyId2
       deprecated: false
       produces:
@@ -1030,42 +1030,6 @@ paths:
         x-testShouldPass: true
         x-testEnabled: true
         x-testName: Asset by Id2
-      x-operation-settings:
-        CollectParameters: false
-        AllowDynamicQueryParameters: false
-        AllowDynamicFormParameters: false
-        IsMultiContentStreaming: false
-  /:
-    post:
-      description: Add a new Actor to the blockchain
-      summary: Add Actor
-      tags:
-      - Asset
-      operationId: AddActor
-      deprecated: false
-      produces:
-      - application/json
-      parameters: []
-      responses:
-        '200':
-          description: ''
-          headers: {}
-      x-unitTests:
-      - request:
-          method: POST
-          uri: /
-        expectedResponse:
-          x-allowExtraHeaders: true
-          x-bodyMatchMode: NONE
-          x-arrayOrderedMatching: false
-          x-arrayCheckCount: false
-          x-matchResponseSchema: true
-          statusCode: '200'
-          headers: {}
-        x-testShouldPass: true
-        x-testEnabled: true
-        x-testName: Add Actor
-        x-testDescription: Add a new Actor to the blockchain
       x-operation-settings:
         CollectParameters: false
         AllowDynamicQueryParameters: false
@@ -1193,7 +1157,7 @@ definitions:
     - assetName
     - aditionalInfoMap
 tags:
-- name: Actor
+- name: Actors
 - name: Steps
-- name: Asset Item
-- name: Asset
+- name: Asset Items
+- name: Assets

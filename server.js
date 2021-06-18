@@ -10,6 +10,7 @@ const { Gateway, Wallets } = require("fabric-network");
 const path = require("path");
 const fs = require("fs");
 const appUser = "appUser";
+const { v4: uuidv4 } = require("uuid");
 
 //create empty global gateway object
 let gateway; //let gateway: Gateway;
@@ -24,7 +25,7 @@ app.post("/api/actors/", async function (req, res) {
     await prepareHyperledgerConnection();
     await contract.submitTransaction(
       "CreateActor",
-      req.body.actorID,
+      generateUuidIfNotProvided(req.body.actorID),
       req.body.actorType,
       req.body.actorName,
       req.body.aditionalInfoMap
@@ -110,7 +111,7 @@ app.post("/api/steps/", async function (req, res) {
     await prepareHyperledgerConnection();
     await contract.submitTransaction(
       "CreateStep",
-      req.body.stepID,
+      generateUuidIfNotProvided(req.body.stepID),
       req.body.stepName,
       req.body.stepOrder,
       req.body.actorType,
@@ -198,7 +199,7 @@ app.post("/api/asset-items/", async function (req, res) {
     await prepareHyperledgerConnection();
     await contract.submitTransaction(
       "CreateAssetItem",
-      req.body.assetItemID,
+      generateUuidIfNotProvided(req.body.assetItemID),
       req.body.ownerID,
       req.body.stepID,
       req.body.deliveryDate,
@@ -344,7 +345,7 @@ app.post("/api/assets/", async function (req, res) {
     await prepareHyperledgerConnection();
     await contract.submitTransaction(
       "CreateEmptyAsset",
-      req.body.assetID,
+      generateUuidIfNotProvided(req.body.assetID),
       req.body.assetName,
       req.body.aditionalInfoMap
     );
@@ -518,6 +519,10 @@ function escapeBackslash(response) {
   return response.toString().includes('"')
     ? JSON.parse(response.toString())
     : response.toString();
+}
+
+function generateUuidIfNotProvided(id) {
+  return id ? id : uuidv4();
 }
 
 app.listen(8080, "localhost");
