@@ -23,13 +23,7 @@ app.post("/api/actors/", async function (req, res) {
   try {
     console.log(`[createActor] called with body: ${req.body}. `);
     await prepareHyperledgerConnection();
-    await contract.submitTransaction(
-      "CreateActor",
-      generateUuidIfNotProvided(req.body.actorID),
-      req.body.actorType,
-      req.body.actorName,
-      req.body.aditionalInfoMap
-    );
+    await createActor(req.body);
     await disconnectGateway();
     console.log("CreateActor Transaction has been submitted");
 
@@ -104,19 +98,23 @@ app.delete("/api/actors/:id", async function (req, res) {
   }
 });
 
+async function createActor(actor) {
+  await contract.submitTransaction(
+    "CreateActor",
+    generateUuidIfNotProvided(actor.actorID),
+    actor.actorType,
+    actor.actorName,
+    actor.aditionalInfoMap
+  );
+}
+
 /***** STEPS ******/
 
 app.post("/api/steps/", async function (req, res) {
   try {
+    console.log(`[createStep] called with body: ${req.body}. `);
     await prepareHyperledgerConnection();
-    await contract.submitTransaction(
-      "CreateStep",
-      generateUuidIfNotProvided(req.body.stepID),
-      req.body.stepName,
-      req.body.stepOrder,
-      req.body.actorType,
-      req.body.aditionalInfoMap
-    );
+    await createStep(req.body);
     await disconnectGateway();
     console.log("CreateStep Transaction has been submitted");
 
@@ -192,6 +190,16 @@ app.delete("/api/steps/:id", async function (req, res) {
   }
 });
 
+async function createStep(step) {
+  await contract.submitTransaction(
+    "CreateStep",
+    generateUuidIfNotProvided(step.stepID),
+    step.stepName,
+    step.stepOrder,
+    step.actorType,
+    step.aditionalInfoMap
+  );
+}
 /***** ASSET_ITEMS ******/
 
 app.post("/api/asset-items/", async function (req, res) {
@@ -343,10 +351,26 @@ app.get("/api/asset-items/track/:id", async function (req, res) {
 app.post("/api/assets/", async function (req, res) {
   try {
     await prepareHyperledgerConnection();
+    for (let actor of req.body.actors) {
+      console.log("actor: ", actor);
+      actor.actorID = generateUuidIfNotProvided(actor.actorID);
+      console.log("generated actorId: ", actor.actorID);
+      await createActor(actor);
+    }
+    for (let step of req.body.steps) {
+      console.log("step: ", step);
+      step.stepID = generateUuidIfNotProvided(step.stepID);
+      console.log("generated stepID: ", step.stepID);
+      await createStep(req.body);
+    }
     await contract.submitTransaction(
-      "CreateEmptyAsset",
+      "CreateAsset",
       generateUuidIfNotProvided(req.body.assetID),
       req.body.assetName,
+      req.body.description,
+      req.body.assetItems,
+      req.body.actors,
+      req.body.steps,
       req.body.aditionalInfoMap
     );
     console.log("Transaction has been submitted");
