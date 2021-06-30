@@ -301,6 +301,9 @@ app.delete("/api/asset-items/:id", async function (req, res) {
 /** MOVE ASSET ITEM */
 app.post("/api/asset-items/:id", async function (req, res) {
   try {
+    req.body.newAssetItemID = generateUuidIfNotProvided(
+      req.body.newAssetItemID
+    );
     await prepareHyperledgerConnection();
     await contract.submitTransaction(
       "MoveAssetItem",
@@ -358,12 +361,14 @@ app.post("/api/assets/", async function (req, res) {
       actor.actorID = generateUuidIfNotProvided(actor.actorID);
       console.log("generated actorId: ", actor.actorID);
       await createActor(actor);
+      console.log("CreateActor Transaction has been submitted");
     }
     for (let step of req.body.steps) {
       console.log("step: ", step);
       step.stepID = generateUuidIfNotProvided(step.stepID);
       console.log("generated stepID: ", step.stepID);
       await createStep(req.body);
+      console.log("createStep Transaction has been submitted");
     }
     await contract.submitTransaction(
       "CreateAsset",
@@ -375,7 +380,7 @@ app.post("/api/assets/", async function (req, res) {
       req.body.steps,
       req.body.aditionalInfoMap
     );
-    console.log("Transaction has been submitted");
+    console.log("CreateAsset Transaction has been submitted");
     res.status(201).send("Transaction has been submitted");
     await disconnectGateway();
   } catch (error) {
