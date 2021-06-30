@@ -99,6 +99,7 @@ app.delete("/api/actors/:id", async function (req, res) {
 });
 
 async function createActor(actor) {
+  console.log("createActor called: ", actor);
   await contract.submitTransaction(
     "CreateActor",
     generateUuidIfNotProvided(actor.actorID),
@@ -191,6 +192,7 @@ app.delete("/api/steps/:id", async function (req, res) {
 });
 
 async function createStep(step) {
+  console.log("createStep called: ", step);
   await contract.submitTransaction(
     "CreateStep",
     generateUuidIfNotProvided(step.stepID),
