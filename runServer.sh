@@ -2,5 +2,5 @@
 
 rm -Rf wallet
 mkdir wallet
-node enrolladmin.js && node registerEnrollClientUser.js
+node enrollAdmin.js && node registerUser.js
 node server.js
