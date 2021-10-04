@@ -1,4 +1,11 @@
 # arion-backend
+## Dependencies
+
+Node version: v11.14.0
+NPM: 7.24.0
+Fabric image: 2.2.0
+CA_DOCKER_IMAGE_VERSION=1.4.7
+
 
 ### Start the test-network
 

@@ -2,7 +2,6 @@
     "name": "arion-backend",
     "version": "1.0.0",
     "description": "backend for the arion App",
-    "main": "index.js",
     "engines": {
         "node": ">=8",
         "npm": ">=5"
@@ -12,23 +11,21 @@
         "pretest": "npm run lint",
         "test": "nyc mocha --recursive"
     },
+    "engineStrict": true,
     "repository": {
         "type": "git",
         "url": "git+https://github.com/juniorug/arion-backend.git"
     },
-    "engineStrict": true,
     "author": "Junior Mascarenhas",
-    "license": "ISC",
     "homepage": "https://github.com/juniorug/arion-backend#readme",
+    "license": "ISC",
     "bugs": {
         "url": "https://github.com/juniorug/arion-backend/issues"
     },
     "dependencies": {
-        "express": "^4.17.1",
         "fabric-ca-client": "^2.2.4",
         "fabric-network": "^2.2.4",
-        "fabric-client": "^1.4.18",
-        "fabric-common": "^2.2.9",
+        "express": "^4.17.1",
         "uuid": "^3.4.0"
     },
     "devDependencies": {

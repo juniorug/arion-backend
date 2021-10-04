@@ -21,6 +21,8 @@ async function main() {
             "..",
             "..",
             "..",
+            "..",
+            "..",
             "home",
             "zeus",
             "goProject",
