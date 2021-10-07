@@ -359,10 +359,7 @@ app.get("/api/asset-items/track/:id", async function (req, res) {
 app.post("/api/assets/", async function (req, res) {
   try {
     await prepareHyperledgerConnection();
-    if(!Boolean(req.body.assetItems)){ 
-      console.log("req.body.assetItems is null or empty. adding empty array to it to prevent failures");
-      req.body.assetItems = [];
-    }
+    
     /* for (let assetItem of req.body.assetItems) {
       console.log("assetItem: ", assetItem);
       assetItem.assetItemID = generateUuidIfNotProvided(assetItem.assetItemID);
@@ -370,10 +367,7 @@ app.post("/api/assets/", async function (req, res) {
       await createAssetItem(assetItem);
       console.log("CreateAssetItem Transaction has been submitted");
     } */
-    if(!Boolean(req.body.actors)){ 
-      console.log("req.body.actors is null or empty. adding empty array to it to prevent failures");
-      req.body.actors = [];
-    }
+    
     /* for (let actor of req.body.actors) {
       console.log("actor: ", actor);
       actor.actorID = generateUuidIfNotProvided(actor.actorID);
@@ -381,10 +375,7 @@ app.post("/api/assets/", async function (req, res) {
       await createActor(actor);
       console.log("CreateActor Transaction has been submitted");
     } */
-    if(!Boolean(req.body.steps)){
-      console.log("req.body.steps is null or empty. adding empty array to it to prevent failures"); 
-      req.body.steps = [];
-    }
+    
     /* for (let step of req.body.steps) {
       console.log("step: ", step);
       step.stepID = generateUuidIfNotProvided(step.stepID);
@@ -398,13 +389,13 @@ app.post("/api/assets/", async function (req, res) {
     console.log(`[CreateAsset] called with body: ${JSON.stringify(req.body)}. `);
     await contract.submitTransaction(
       "CreateAsset",
-      req.body.assetID,
-      req.body.assetName,
-      req.body.description,
-      JSON.stringify(req.body.assetItems),
-      JSON.stringify(req.body.actors),
-      JSON.stringify(req.body.steps),
-      JSON.stringify(req.body.aditionalInfoMap)
+      preventEmptyField(req.body.assetID),
+      preventEmptyField(req.body.assetName),
+      preventEmptyField(req.body.description),
+      JSON.stringify(preventNullList(req.body.assetItems)),
+      JSON.stringify(preventNullList(req.body.actors)),
+      JSON.stringify(preventNullList(req.body.steps)),
+      JSON.stringify(preventNullList(req.body.aditionalInfoMap)),
     );
     console.log("CreateAsset Transaction has been submitted");
     res.status(201).send("Transaction has been submitted");
@@ -579,6 +570,15 @@ function escapeBackslash(response) {
 function generateUuidIfNotProvided(id) {
   return id ? id : uuidv4();
 }
+
+function preventEmptyField(field) {
+  return field ? field : "";
+}
+
+function preventNullList(field) {
+  return (Boolean(field))? field :[];
+}
+
 
 app.listen(8080, "localhost");
 console.log("Running on http://localhost:8080");
