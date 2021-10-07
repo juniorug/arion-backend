@@ -21,7 +21,7 @@ let contract; //let contract: Contract;
 
 app.post("/api/actors/", async function (req, res) {
   try {
-    console.log(`[createActor] called with body: ${req.body}. `);
+    console.log(`[createActor] called with body: ${JSON.stringify(req.body)}. `);
     await prepareHyperledgerConnection();
     await createActor(req.body);
     await disconnectGateway();
@@ -33,7 +33,7 @@ app.post("/api/actors/", async function (req, res) {
     res.status(201).send("Transaction has been submitted");
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
-    process.exit(1);
+    res.status(500).send("Internal server error. Please try again later.");
   }
 });
 
@@ -46,7 +46,7 @@ app.get("/api/actors", async function (req, res) {
     await disconnectGateway();
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
-    process.exit(1);
+    res.status(500).send("Internal server error. Please try again later.");
   }
 });
 
@@ -63,7 +63,7 @@ app.put("/api/actors/:id", async function (req, res) {
     await disconnectGateway();
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
-    process.exit(1);
+    res.status(500).send("Internal server error. Please try again later.");
   }
 });
 
@@ -78,7 +78,7 @@ app.get("/api/actors/:id", async function (req, res) {
     await disconnectGateway();
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
-    process.exit(1);
+    res.status(500).send("Internal server error. Please try again later.");
   }
 });
 
@@ -94,15 +94,16 @@ app.delete("/api/actors/:id", async function (req, res) {
     await disconnectGateway();
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
-    process.exit(1);
+    res.status(500).send("Internal server error. Please try again later.");
   }
 });
 
 async function createActor(actor) {
+  actor.actorID = generateUuidIfNotProvided(actor.actorID);
   console.log("createActor called: ", actor);
   await contract.submitTransaction(
     "CreateActor",
-    generateUuidIfNotProvided(actor.actorID),
+    actor.actorID,
     actor.actorType,
     actor.actorName,
     actor.aditionalInfoMap
@@ -125,7 +126,7 @@ app.post("/api/steps/", async function (req, res) {
     res.status(201).send("Transaction has been submitted");
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
-    process.exit(1);
+    res.status(500).send("Internal server error. Please try again later.");
   }
 });
 
@@ -138,7 +139,7 @@ app.get("/api/steps", async function (req, res) {
     await disconnectGateway();
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
-    process.exit(1);
+    res.status(500).send("Internal server error. Please try again later.");
   }
 });
 
@@ -155,7 +156,7 @@ app.put("/api/steps/:id", async function (req, res) {
     await disconnectGateway();
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
-    process.exit(1);
+    res.status(500).send("Internal server error. Please try again later.");
   }
 });
 
@@ -171,7 +172,7 @@ app.get("/api/steps/:id", async function (req, res) {
     await disconnectGateway();
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
-    process.exit(1);
+    res.status(500).send("Internal server error. Please try again later.");
   }
 });
 
@@ -187,15 +188,16 @@ app.delete("/api/steps/:id", async function (req, res) {
     await disconnectGateway();
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
-    process.exit(1);
+    res.status(500).send("Internal server error. Please try again later.");
   }
 });
 
 async function createStep(step) {
+  generateUuidIfNotProvided(step.stepID),
   console.log("createStep called: ", step);
   await contract.submitTransaction(
     "CreateStep",
-    generateUuidIfNotProvided(step.stepID),
+    step.stepID,
     step.stepName,
     step.stepOrder,
     step.actorType,
@@ -207,9 +209,10 @@ async function createStep(step) {
 app.post("/api/asset-items/", async function (req, res) {
   try {
     await prepareHyperledgerConnection();
+    req.body.assetItemID = generateUuidIfNotProvided(req.body.assetItemID);
     await contract.submitTransaction(
       "CreateAssetItem",
-      generateUuidIfNotProvided(req.body.assetItemID),
+      req.body.assetItemID,
       req.body.ownerID,
       req.body.stepID,
       req.body.deliveryDate,
@@ -232,7 +235,7 @@ app.post("/api/asset-items/", async function (req, res) {
     res.status(201).send("Transaction has been submitted");
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
-    process.exit(1);
+    res.status(500).send("Internal server error. Please try again later.");
   }
 });
 
@@ -245,7 +248,7 @@ app.get("/api/asset-items", async function (req, res) {
     await disconnectGateway();
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
-    process.exit(1);
+    res.status(500).send("Internal server error. Please try again later.");
   }
 });
 
@@ -262,7 +265,7 @@ app.put("/api/asset-items/:id", async function (req, res) {
     await disconnectGateway();
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
-    process.exit(1);
+    res.status(500).send("Internal server error. Please try again later.");
   }
 });
 
@@ -278,7 +281,7 @@ app.get("/api/asset-items/:id", async function (req, res) {
     await disconnectGateway();
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
-    process.exit(1);
+    res.status(500).send("Internal server error. Please try again later.");
   }
 });
 
@@ -294,7 +297,7 @@ app.delete("/api/asset-items/:id", async function (req, res) {
     await disconnectGateway();
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
-    process.exit(1);
+    res.status(500).send("Internal server error. Please try again later.");
   }
 });
 
@@ -330,7 +333,7 @@ app.post("/api/asset-items/:id", async function (req, res) {
     res.send("Transaction has been submitted");
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
-    process.exit(1);
+    res.status(500).send("Internal server error. Please try again later.");
   }
 });
 
@@ -347,7 +350,7 @@ app.get("/api/asset-items/track/:id", async function (req, res) {
     await disconnectGateway();
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
-    process.exit(1);
+    res.status(500).send("Internal server error. Please try again later.");
   }
 });
 
@@ -356,36 +359,59 @@ app.get("/api/asset-items/track/:id", async function (req, res) {
 app.post("/api/assets/", async function (req, res) {
   try {
     await prepareHyperledgerConnection();
-    for (let actor of req.body.actors) {
+    if(!Boolean(req.body.assetItems)){ 
+      console.log("req.body.assetItems is null or empty. adding empty array to it to prevent failures");
+      req.body.assetItems = [];
+    }
+    /* for (let assetItem of req.body.assetItems) {
+      console.log("assetItem: ", assetItem);
+      assetItem.assetItemID = generateUuidIfNotProvided(assetItem.assetItemID);
+      console.log("generated assetItemId: ", assetItem.assetItemID);
+      await createAssetItem(assetItem);
+      console.log("CreateAssetItem Transaction has been submitted");
+    } */
+    if(!Boolean(req.body.actors)){ 
+      console.log("req.body.actors is null or empty. adding empty array to it to prevent failures");
+      req.body.actors = [];
+    }
+    /* for (let actor of req.body.actors) {
       console.log("actor: ", actor);
       actor.actorID = generateUuidIfNotProvided(actor.actorID);
       console.log("generated actorId: ", actor.actorID);
       await createActor(actor);
       console.log("CreateActor Transaction has been submitted");
+    } */
+    if(!Boolean(req.body.steps)){
+      console.log("req.body.steps is null or empty. adding empty array to it to prevent failures"); 
+      req.body.steps = [];
     }
-    for (let step of req.body.steps) {
+    /* for (let step of req.body.steps) {
       console.log("step: ", step);
       step.stepID = generateUuidIfNotProvided(step.stepID);
       console.log("generated stepID: ", step.stepID);
       await createStep(req.body);
       console.log("createStep Transaction has been submitted");
-    }
+    } */
+    req.body.assetID = generateUuidIfNotProvided(req.body.assetID);
+    console.log("before contract.submitTransaction for assetID: ", req.body.assetID);
+    //req.body.actors = ${JSON.stringify(req.body.actors)};
+    console.log(`[CreateAsset] called with body: ${JSON.stringify(req.body)}. `);
     await contract.submitTransaction(
       "CreateAsset",
-      generateUuidIfNotProvided(req.body.assetID),
+      req.body.assetID,
       req.body.assetName,
       req.body.description,
-      req.body.assetItems,
-      req.body.actors,
-      req.body.steps,
-      req.body.aditionalInfoMap
+      JSON.stringify(req.body.assetItems),
+      JSON.stringify(req.body.actors),
+      JSON.stringify(req.body.steps),
+      JSON.stringify(req.body.aditionalInfoMap)
     );
     console.log("CreateAsset Transaction has been submitted");
     res.status(201).send("Transaction has been submitted");
     await disconnectGateway();
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
-    process.exit(1);
+    res.status(500).send("Internal server error. Please try again later.");
   }
 });
 
@@ -398,7 +424,7 @@ app.get("/api/assets", async function (req, res) {
     await disconnectGateway();
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
-    process.exit(1);
+    res.status(500).send("Internal server error. Please try again later.");
   }
 });
 
@@ -415,7 +441,7 @@ app.put("/api/assets/:id", async function (req, res) {
     await disconnectGateway();
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
-    process.exit(1);
+    res.status(500).send("Internal server error. Please try again later.");
   }
 });
 
@@ -431,7 +457,7 @@ app.get("/api/assets/:id", async function (req, res) {
     await disconnectGateway();
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
-    process.exit(1);
+    res.status(500).send("Internal server error. Please try again later.");
   }
 });
 
@@ -447,7 +473,7 @@ app.delete("/api/assets/:id", async function (req, res) {
     await disconnectGateway();
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
-    process.exit(1);
+    res.status(500).send("Internal server error. Please try again later.");
   }
 });
 
@@ -535,7 +561,7 @@ async function appendObjectToAsset(functionName, itemId, assetID) {
     console.error(
       `appendObjectToAsset: Failed to evaluate transaction: ${error}`
     );
-    process.exit(1);
+    res.status(500).send("Internal server error. Please try again later.");
   }
 }
 
