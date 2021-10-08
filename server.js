@@ -4,7 +4,9 @@ var express = require("express");
 var bodyParser = require("body-parser");
 
 var app = express();
+var cors = require('cors');
 app.use(bodyParser.json());
+app.use(cors());
 
 const { Gateway, Wallets } = require("fabric-network");
 const path = require("path");
