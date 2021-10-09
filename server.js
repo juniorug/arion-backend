@@ -1,12 +1,14 @@
 "use strict";
 
 var express = require("express");
-var bodyParser = require("body-parser");
+//var bodyParser = require("body-parser");
 
 var app = express();
 var cors = require('cors');
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 app.use(cors());
+app.use(express.json())
+app.use(express.urlencoded({ extended: true}))
 
 const { Gateway, Wallets } = require("fabric-network");
 const path = require("path");
