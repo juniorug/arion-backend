@@ -15,6 +15,7 @@ const path = require("path");
 const fs = require("fs");
 const appUser = "appUser";
 const { v4: uuidv4 } = require("uuid");
+const { Console } = require("console");
 
 //create empty global gateway object
 let gateway; //let gateway: Gateway;
@@ -34,7 +35,8 @@ app.post("/api/actors/", async function (req, res) {
     await appendObjectToAsset("AddActor", req.body.actorID, req.body.assetID);
     console.log("AddActor Transaction has been submitted");
 
-    res.status(201).send("Transaction has been submitted");
+    res.send('""');
+    res.status(201).end();
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
     res.status(500).send("Internal server error. Please try again later.");
@@ -127,7 +129,8 @@ app.post("/api/steps/", async function (req, res) {
     await appendObjectToAsset("AddStep", req.body.stepID, req.body.assetID);
     console.log("AddStep Transaction has been submitted");
 
-    res.status(201).send("Transaction has been submitted");
+    res.send('""');
+    res.status(201).end();
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
     res.status(500).send("Internal server error. Please try again later.");
@@ -236,7 +239,8 @@ app.post("/api/asset-items/", async function (req, res) {
     );
     console.log("AddAssetItemID Transaction has been submitted");
 
-    res.status(201).send("Transaction has been submitted");
+    res.send('{"message": "CreateAsset Transaction has been submitted"}');
+    res.status(201).end();
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
     res.status(500).send("Internal server error. Please try again later.");
@@ -402,8 +406,9 @@ app.post("/api/assets/", async function (req, res) {
       JSON.stringify(preventNullList(req.body.aditionalInfoMap)),
     );
     console.log("CreateAsset Transaction has been submitted");
-    res.status(201).send("Transaction has been submitted");
     await disconnectGateway();
+    res.send('""');
+    res.status(201).end();
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
     res.status(500).send("Internal server error. Please try again later.");
@@ -429,11 +434,17 @@ app.put("/api/assets/:id", async function (req, res) {
     await contract.submitTransaction(
       "UpdateAsset",
       req.params.id,
-      req.body.newOwner
+      preventEmptyField(req.body.assetName),
+      preventEmptyField(req.body.description),
+      JSON.stringify(preventNullList(req.body.assetItems)),
+      JSON.stringify(preventNullList(req.body.actors)),
+      JSON.stringify(preventNullList(req.body.steps)),
+      JSON.stringify(preventNullList(req.body.aditionalInfoMap)),
     );
-    console.log("Transaction has been submitted");
-    res.send("Transaction has been submitted");
+    console.log("UpdateAsset Transaction has been submitted");
     await disconnectGateway();
+    res.send('""');
+    res.status(204).end();
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
     res.status(500).send("Internal server error. Please try again later.");
@@ -580,7 +591,12 @@ function preventEmptyField(field) {
 }
 
 function preventNullList(field) {
-  return (Boolean(field))? field :[];
+  if (!Boolean(field)) {
+    return [];
+  } else {
+    field.forEach(x => x.aditionalInfoMap = (Boolean(x.aditionalInfoMap)) ? x.aditionalInfoMap : []);
+  }
+  return field;
 }
 
 
