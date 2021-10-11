@@ -367,43 +367,28 @@ app.get("/api/asset-items/track/:id", async function (req, res) {
 app.post("/api/assets/", async function (req, res) {
   try {
     await prepareHyperledgerConnection();
+
+    req.body.assetItems = preventNullList(req.body.assetItems);
+    req.body.actors = preventNullList(req.body.actors);
+    req.body.steps = preventNullList(req.body.steps);
+    req.body.aditionalInfoMap = preventNullList(req.body.aditionalInfoMap);
+
+    req.body.assetItems.forEach(x => x.assetItemID = generateUuidIfNotProvided(x.assetItemID));
+    req.body.actors.forEach(x => x.actorID = generateUuidIfNotProvided(x.actorID));
+    req.body.steps.forEach(x => x.stepID = generateUuidIfNotProvided(x.stepID));
     
-    /* for (let assetItem of req.body.assetItems) {
-      console.log("assetItem: ", assetItem);
-      assetItem.assetItemID = generateUuidIfNotProvided(assetItem.assetItemID);
-      console.log("generated assetItemId: ", assetItem.assetItemID);
-      await createAssetItem(assetItem);
-      console.log("CreateAssetItem Transaction has been submitted");
-    } */
-    
-    /* for (let actor of req.body.actors) {
-      console.log("actor: ", actor);
-      actor.actorID = generateUuidIfNotProvided(actor.actorID);
-      console.log("generated actorId: ", actor.actorID);
-      await createActor(actor);
-      console.log("CreateActor Transaction has been submitted");
-    } */
-    
-    /* for (let step of req.body.steps) {
-      console.log("step: ", step);
-      step.stepID = generateUuidIfNotProvided(step.stepID);
-      console.log("generated stepID: ", step.stepID);
-      await createStep(req.body);
-      console.log("createStep Transaction has been submitted");
-    } */
     req.body.assetID = generateUuidIfNotProvided(req.body.assetID);
-    console.log("before contract.submitTransaction for assetID: ", req.body.assetID);
-    //req.body.actors = ${JSON.stringify(req.body.actors)};
     console.log(`[CreateAsset] called with body: ${JSON.stringify(req.body)}. `);
+
     await contract.submitTransaction(
       "CreateAsset",
       preventEmptyField(req.body.assetID),
       preventEmptyField(req.body.assetName),
       preventEmptyField(req.body.description),
-      JSON.stringify(preventNullList(req.body.assetItems)),
-      JSON.stringify(preventNullList(req.body.actors)),
-      JSON.stringify(preventNullList(req.body.steps)),
-      JSON.stringify(preventNullList(req.body.aditionalInfoMap)),
+      JSON.stringify(req.body.assetItems),
+      JSON.stringify(req.body.actors),
+      JSON.stringify(req.body.steps),
+      JSON.stringify(req.body.aditionalInfoMap),
     );
     console.log("CreateAsset Transaction has been submitted");
     await disconnectGateway();
@@ -431,6 +416,16 @@ app.get("/api/assets", async function (req, res) {
 app.put("/api/assets/:id", async function (req, res) {
   try {
     await prepareHyperledgerConnection();
+
+    req.body.assetItems = preventNullList(req.body.assetItems);
+    req.body.actors = preventNullList(req.body.actors);
+    req.body.steps = preventNullList(req.body.steps);
+    req.body.aditionalInfoMap = preventNullList(req.body.aditionalInfoMap);
+
+    req.body.assetItems.forEach(x => x.assetItemID = generateUuidIfNotProvided(x.assetItemID));
+    req.body.actors.forEach(x => x.actorID = generateUuidIfNotProvided(x.actorID));
+    req.body.steps.forEach(x => x.stepID = generateUuidIfNotProvided(x.stepID));
+    
     await contract.submitTransaction(
       "UpdateAsset",
       req.params.id,
@@ -474,7 +469,7 @@ app.delete("/api/assets/:id", async function (req, res) {
       "DeleteAsset",
       req.params.id
     );
-    console.log(`Transaction. result is: ${result.toString()}`);
+    console.log(`DeleteAsset Transaction. result is: ${result.toString()}`);
     res.status(204).send();
     await disconnectGateway();
   } catch (error) {

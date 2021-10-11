@@ -23,6 +23,7 @@
 If the errors below happens, please procedure as described 
 #### Failed to register user "appUser"
 ```
+docker exec -it ca_org1 bash
 cd /etc/hyperledger/fabric-ca-server/
 apk add --no-cache curl jq python3 py3-pip sqlite
 sqlite3 fabric-ca-server.db
